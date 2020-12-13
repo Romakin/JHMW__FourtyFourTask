@@ -24,8 +24,12 @@ public class PostController {
     response.getWriter().print(gson.toJson(data));
   }
 
-  public void getById(long id, HttpServletResponse response) {
+  public void getById(long id, HttpServletResponse response) throws IOException {
     // TODO: deserialize request & serialize response
+    response.setContentType(APPLICATION_JSON);
+    response.getWriter().print(
+      new Gson().toJson(service.getById(id))
+    );
   }
 
   public void save(Reader body, HttpServletResponse response) throws IOException {
@@ -36,7 +40,10 @@ public class PostController {
     response.getWriter().print(gson.toJson(data));
   }
 
-  public void removeById(long id, HttpServletResponse response) {
+  public void removeById(long id, HttpServletResponse response) throws IOException {
     // TODO: deserialize request & serialize response
+    response.setContentType(APPLICATION_JSON);
+    service.removeById(id);
+    response.getWriter().print("{\"status\":\"removed\"}");
   }
 }

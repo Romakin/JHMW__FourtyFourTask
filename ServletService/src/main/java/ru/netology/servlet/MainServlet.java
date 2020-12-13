@@ -47,11 +47,16 @@ public class MainServlet extends HttpServlet {
 
   @Override
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
-    long id = getId(request.getRequestURI());
-    if (id > 0)
-      controller.removeById(id, response);
-    else
-      response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    try {
+      long id = getId(request.getRequestURI());
+      if (id > 0)
+          controller.removeById(id, response);
+      else
+        response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    } catch (IOException e) {
+      e.printStackTrace();
+      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
   }
 
   private long getId(String path) {
