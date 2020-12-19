@@ -1,5 +1,6 @@
 package ru.netology.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.netology.model.Post;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentSkipListSet;
 
-// Stub
+@Repository
 public class PostRepository {
 
   private ConcurrentSkipListSet<Post> repositoryArray = new ConcurrentSkipListSet<>(Comparator.comparing(o -> o.getId()));
